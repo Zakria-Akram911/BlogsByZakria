@@ -1,7 +1,7 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
-const Header = ({ active, user }) => {
+const Header = ({ user, handleLogout }) => {
   const userId = user?.uid;
 
   return (
@@ -27,33 +27,15 @@ const Header = ({ active, user }) => {
             >
               <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                 <NavLink to="/" style={{ textDecoration: "none" }}>
-                  <li
-                    className={`nav-item nav-link ${
-                      active === "home" ? "active" : ""
-                    }`}
-                  >
-                    Home
-                  </li>
+                  <li className={`nav-item nav-link `}>Home</li>
                 </NavLink>
 
                 <NavLink to="/add-blog" style={{ textDecoration: "none" }}>
-                  <li
-                    className={`nav-item nav-link ${
-                      active === "add-blog" ? "active" : ""
-                    }`}
-                  >
-                    Create
-                  </li>
+                  <li className={`nav-item nav-link `}>Create</li>
                 </NavLink>
 
                 <NavLink to="/about" style={{ textDecoration: "none" }}>
-                  <li
-                    className={`nav-item nav-link ${
-                      active === "about" ? "active" : ""
-                    }`}
-                  >
-                    About
-                  </li>
+                  <li className={`nav-item nav-link`}>About</li>
                 </NavLink>
               </ul>
               <div className="row g-3">
@@ -75,17 +57,13 @@ const Header = ({ active, user }) => {
                       <p style={{ marginTop: "12px", marginLeft: "5px" }}>
                         {user?.displayName}
                       </p>
-                      <li className="nav-item nav-link">Logout</li>
+                      <li className="nav-item nav-link" onClick={handleLogout}>
+                        Logout
+                      </li>
                     </>
                   ) : (
                     <NavLink to="/auth" style={{ textDecoration: "none" }}>
-                      <li
-                        className={`nav-item nav-link ${
-                          active === "login" ? "active" : ""
-                        }`}
-                      >
-                        Login
-                      </li>
+                      <li className={`nav-item nav-link `}>Login</li>
                     </NavLink>
                   )}
                 </ul>

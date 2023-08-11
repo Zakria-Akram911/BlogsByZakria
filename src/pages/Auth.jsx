@@ -29,21 +29,24 @@ const Auth = () => {
   };
 
   const handleSubmit = async (e) => {
-    console.log("okay");
     e.preventDefault();
     if (!signUp) {
       if (email && password) {
-        const { user } = await signInWithEmailAndPassword(
-          auth,
-          email,
-          password
-        );
+        try {
+          const { user } = await signInWithEmailAndPassword(
+            auth,
+            email,
+            password
+          );
+        } catch {
+          return toast.error("Username and password do not match");
+        }
       } else {
-        toast.error("Both Feilds are required");
+        return toast.error("Both Feilds are required");
       }
     } else {
       if (password !== confirmPassword) {
-        return toast.error("Password and Confirm password do not match");
+        return toast.error("Password do not match");
       }
 
       if (fname && lname && password && confirmPassword && email) {
